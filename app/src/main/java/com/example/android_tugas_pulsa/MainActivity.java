@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -24,38 +25,55 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MainActivity extends AppCompatActivity {
 
-    private RecyclerView list_pulsa;
+
     private ArrayList<Pulsa> arrTemp =new ArrayList<>();
     private PulsaAdapter pulsaAdapter;
     private PulsaViewModel pulsaViewModel;
     private List<Pulsa> pulsaList;
-    private View viewfocus;
-    private RelativeLayout layout_rincian;
-    private AppCompatImageView ic_close;
-    private AppCompatTextView tv_payment,tv_pulsa;
-    private CoordinatorLayout layoutPulsa;
-    private LinearLayoutCompat btn_pay;
+
+    @SuppressLint("NonConstantResourceId")
+    @BindView(R.id.pulsaRecyclerView)
+    RecyclerView list_pulsa;
+
+    @SuppressLint("NonConstantResourceId")
+    @BindView(R.id.viewfocus)
+    View viewfocus;
+
+    @SuppressLint("NonConstantResourceId")
+    @BindView(R.id.layout_rincian)
+    RelativeLayout layout_rincian;
+
+    @SuppressLint("NonConstantResourceId")
+    @BindView(R.id.ic_close)
+    AppCompatImageView ic_close;
+
+    @SuppressLint("NonConstantResourceId")
+    @BindView(R.id.tv_payment)
+    AppCompatTextView tv_payment;
+
+    @SuppressLint("NonConstantResourceId")
+    @BindView(R.id.tv_pulsa)
+    AppCompatTextView tv_pulsa;
+
+    @SuppressLint("NonConstantResourceId")
+    @BindView(R.id.layoutPulsa)
+    CoordinatorLayout layoutPulsa;
+
+    @SuppressLint("NonConstantResourceId")
+    @BindView(R.id.btn_pay)
+    LinearLayoutCompat btn_pay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        initView();
+        ButterKnife.bind(this);
         initData();
-    }
-
-    private void initView(){
-        list_pulsa=findViewById(R.id.list_pulsa);
-        viewfocus=findViewById(R.id.viewfocus);
-        layout_rincian=findViewById(R.id.layout_rincian);
-        ic_close=findViewById(R.id.ic_close);
-        tv_payment=findViewById(R.id.tv_payment);
-        tv_pulsa=findViewById(R.id.tv_pulsa);
-        layoutPulsa=findViewById(R.id.layoutPulsa);
-        btn_pay=findViewById(R.id.btn_pay);
     }
 
     private void initData(){

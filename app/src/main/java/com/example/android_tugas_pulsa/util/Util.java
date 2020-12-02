@@ -1,5 +1,8 @@
 package com.example.android_tugas_pulsa.util;
 
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
@@ -59,6 +62,21 @@ public class Util {
         // Collapse speed of 1dp/ms
         a.setDuration((int)(initialHeight / v.getContext().getResources().getDisplayMetrics().density) * animationSpeed);
         v.startAnimation(a);
+    }
+    public static void showProgressDialog(ProgressDialog progressDialog, Context context) {
+        if (progressDialog == null) {
+            progressDialog = new ProgressDialog(context);
+            progressDialog.setMessage("Please wait...");
+            progressDialog.setCancelable(true);
+            progressDialog.setCanceledOnTouchOutside(false);
+        }
+        progressDialog.show();
+    }
+
+    public static void dismissProgressDialog(ProgressDialog progressDialog) {
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.dismiss();
+        }
     }
 }
 

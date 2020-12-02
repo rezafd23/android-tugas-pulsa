@@ -3,24 +3,26 @@ package com.example.android_tugas_pulsa;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class ResponseActivity extends AppCompatActivity {
 
-    private AppCompatButton btn_back;
+    @SuppressLint("NonConstantResourceId")
+    @BindView(R.id.btn_back)
+    AppCompatButton btn_back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_response);
-        initView();
+        ButterKnife.bind(this);
         onClick();
-    }
-
-    private void initView(){
-        btn_back=findViewById(R.id.btn_back);
     }
 
     private void onClick(){

@@ -1,5 +1,6 @@
 package com.example.android_tugas_pulsa.adapter;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -24,17 +25,22 @@ import com.example.android_tugas_pulsa.viewmodel.PulsaViewModel;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+
 public class PulsaAdapter extends RecyclerView.Adapter<PulsaAdapter.PulsaViewHolder> {
 
-    private Context context;
-    private RelativeLayout layout_rincian;
-    private ArrayList<Pulsa> list;
-    private View viewfocus;
-    private AppCompatImageView ic_close;
-    private AppCompatTextView tv_payment,tv_pulsa;
-    private CoordinatorLayout layoutPulsa;
-    private LinearLayoutCompat btn_pay;
-    private PulsaViewModel pulsaViewModel;
+    Context context;
+    RelativeLayout layout_rincian;
+    ArrayList<Pulsa> list;
+    View viewfocus;
+    AppCompatImageView ic_close;
+
+    ProgressDialog progressDialog;
+
+    AppCompatTextView tv_payment,tv_pulsa;
+    CoordinatorLayout layoutPulsa;
+    LinearLayoutCompat btn_pay;
+    PulsaViewModel pulsaViewModel;
 
     public PulsaAdapter(Context context, ArrayList<Pulsa> list, RelativeLayout layout_rincian,View viewfocus,
                         AppCompatImageView ic_close,AppCompatTextView tv_payment,CoordinatorLayout layoutPulsa,
@@ -92,10 +98,12 @@ public class PulsaAdapter extends RecyclerView.Adapter<PulsaAdapter.PulsaViewHol
         btn_pay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Util.showProgressDialog(progressDialog,context);
                 Pulsa pulsa1 = new Pulsa(list.get(position).getCode(),list.get(position).getNominal());
                 pulsaViewModel.buyPulsa(pulsa1)
                         .observe((LifecycleOwner) context, pulsaResponse -> {
                             if (pulsaResponse.getCode()==200){
+                                Util.dismissProgressDialog(progressDialog);
                                 Intent intent = new Intent(context, ResponseActivity.class);
                                 context.startActivity(intent);
                             }
